@@ -72,12 +72,12 @@ def double_conv_layer(x, size, dropout, batch_norm):
 
 def ZF_UNET_160(dropout_val=0.0, batch_norm=True):
     if K.image_dim_ordering() == 'th':
-        inputs = Input((INPUT_CHANNELS, 160, 160))
+        inputs = Input((INPUT_CHANNELS, 224, 224))
         axis = 1
     else:
         inputs = Input((160, 160, INPUT_CHANNELS))
         axis = 3
-    filters = 16
+    filters = 32
 
     conv_224 = double_conv_layer(inputs, filters, dropout_val, batch_norm)
     pool_112 = MaxPooling2D(pool_size=(2, 2))(conv_224)
